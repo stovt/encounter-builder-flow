@@ -1,0 +1,19 @@
+[ignore]
+<PROJECT_ROOT>/node_modules/polished/.*
+
+[include]
+
+[libs]
+definitions
+
+[lints]
+
+[options]
+module.name_mapper='^shared' ->'<PROJECT_ROOT>/src/shared'
+module.name_mapper='^pages' ->'<PROJECT_ROOT>/src/pages'
+module.name_mapper='^styles' ->'<PROJECT_ROOT>/src/styles'
+module.name_mapper='^config' ->'<PROJECT_ROOT>/src/config'
+module.name_mapper='^store' ->'<PROJECT_ROOT>/src/store'
+module.name_mapper='^public' ->'<PROJECT_ROOT>/src/public'
+
+[strict]
