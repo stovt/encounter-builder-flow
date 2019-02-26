@@ -2,12 +2,12 @@
 import type { Locale } from 'shared/types/locale';
 import type { Action } from 'shared/types';
 import { flattenObject } from 'shared/helpers';
-import enLocale from 'public/data/locales/en.json';
+import ruLocale from 'public/data/locales/ru.json';
 import { LOAD_LOCALE_SUCCESS } from './locale.actions';
 
 const initialState: Locale = {
-  locale: 'en',
-  messages: flattenObject(enLocale)
+  locale: 'ru',
+  messages: flattenObject(ruLocale)
 };
 
 const localeReducer = (state: Locale = initialState, action: Action): Locale => {

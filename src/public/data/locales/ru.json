@@ -1,0 +1,74 @@
+{
+  "title": "Encounter builder",
+  "group-info": {
+    "title": "Информация о группе",
+    "players": "Игроков",
+    "level": "Уровень",
+    "add-another-level": "Добавить еще один уровень",
+    "party-levels": {
+      "easy": "Легко: {exp} опыта",
+      "medium": "Средне: {exp} опыта",
+      "hard": "Сложно: {exp} опыта",
+      "deadly": "Смертельно: {exp} опыта",
+      "budget": "Дневной бюджет: {exp} опыта"
+    }
+  },
+  "encounter-info": {
+    "title": "Информация о встече",
+    "cr": "Сложность",
+    "xp": "Опыт",
+    "randomize-monster": "Случайный монстр",
+    "difficulty": "Сложность",
+    "total-xp": "Всего опыта",
+    "adjusted-xp": "Урегулированый опыт",
+    "exp-per-player": "{exp} на игрока",
+    "battle": "Бой"
+  },
+  "table-labels": {
+    "previousText": "Предыдущая",
+    "nextText": "Следующая",
+    "loadingText": "Загрузка...",
+    "noDataText": "Записей не найдено",
+    "pageText": "Страница",
+    "ofText": "из",
+    "rowsText": "строк",
+    "pageJumpText": "перейти на страницу",
+    "rowsSelectorText": "строк на странице",
+    "min": "Мин",
+    "max": "Макс",
+    "Any": "Любой"
+  },
+  "monster": {
+    "name": "Имя",
+    "cr": "Сложность",
+    "size": "Размер",
+    "sizes": {
+      "Tiny": "Крохотный",
+      "Small": "Маленький",
+      "Medium":  "Средний",
+      "Large": "Большой",
+      "Huge": "Огромный",
+      "Gargantuan": "Гигантский"
+    },
+    "type": "Тип",
+    "types": {
+      "aberration": "Аберрация",
+      "beast": "Зверь",
+      "celestial": "Небожитель",
+      "construct": "Конструкт",
+      "dragon": "Дракон",
+      "elemental": "Элементаль",
+      "fey": "Фея",
+      "fiend": "Дьявол",
+      "giant": "Гигант",
+      "humanoid": "Гуманоид",
+      "monstrosity": "Монстр",
+      "ooze": "Слизь",
+      "plant": "Растение",
+      "undead": "Нежить",
+      "swarm": "Рой",
+      "titan": "Титан"
+    },
+    "alignment": "Мировозрение"
+  }
+}

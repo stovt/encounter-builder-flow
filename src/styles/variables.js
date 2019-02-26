@@ -26,22 +26,28 @@ theme.fonts = {};
 theme.fonts.main = 'Open Sans';
 
 theme.fontSize = {};
-theme.fontSize.bodyValue = 16;
-theme.fontSize.titleValue = 24;
+theme.fontSize.bodyValue = 14;
+theme.fontSize.titleValue = 30;
 theme.fontSize.body = `${theme.fontSize.bodyValue}px`;
 theme.fontSize.title = `${theme.fontSize.titleValue}px`;
 
 theme.colors = {};
-theme.colors.body = '#f5f8fb';
-theme.colors.prime = '#00448b';
+theme.colors.body = '#f9fafc';
 theme.colors.error = '#d0021b';
 theme.colors.black = '#000';
 theme.colors.white = '#fff';
-theme.colors.inputBG = '#e5eaef';
-theme.colors.optionBG = '#f2f2f2';
-theme.colors.membershipBG = '#dce6f0';
-theme.colors.inactive = 'rgba(0, 0, 0, 0.5)';
-theme.colors.hr = '#e0e0e0';
+theme.colors.link = '#00448b';
+theme.colors.hr = '#ddd';
+
+theme.colors.btn = {};
+theme.colors.btn.prime1 = '#da3319';
+theme.colors.btn.prime2 = '#eb4930';
+theme.colors.btn.shadow = 'rgba(60, 18, 6, 0.16)';
+theme.colors.input = {};
+
+theme.colors.input.border = '#dde3e8';
+theme.colors.input.focusBorder = '#197aad';
+theme.colors.input.focusShadow = 'rgba(25, 122, 173, 0.5)';
 
 theme.margins = {};
 theme.margins.small = '16px';
@@ -58,7 +64,7 @@ theme.paddings.input = '22px 10px 6px';
 
 theme.flexboxgrid = {
   gridSize: 12,
-  gutterWidth: 3.2, // rem
+  gutterWidth: 2, // rem
   outerMargin: 1.6, // rem
   mediaQuery: 'only screen',
   container: {

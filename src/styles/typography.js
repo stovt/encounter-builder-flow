@@ -36,7 +36,7 @@ const GlobalTypographyStyles = createGlobalStyle`
   }
 
   a {
-    color: ${theme.colors.prime};
+    color: ${theme.colors.link};
     text-decoration: none;
   }
 `;
