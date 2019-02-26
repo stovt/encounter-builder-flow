@@ -1,5 +1,5 @@
 // @flow
-import { v4 } from 'uuid';
+import v4 from 'uuid/v4';
 import type { PartyLevel, PartyLevels, PlayerLevels } from 'shared/types/encounterBuilder';
 
 const PLAYER_LEVELS: PlayerLevels = {};

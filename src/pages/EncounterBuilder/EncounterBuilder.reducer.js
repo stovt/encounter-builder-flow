@@ -1,5 +1,5 @@
 // @flow
-import { v4 } from 'uuid';
+import v4 from 'uuid/v4';
 import type { EncounterBuilder } from 'shared/types/encounterBuilder';
 import type { Action } from 'shared/types';
 import {
