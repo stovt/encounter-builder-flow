@@ -1,7 +1,8 @@
 // @flow
 declare class process {
   static env: {
-    NODE_PATH: string
+    NODE_PATH: string,
+    PUBLIC_URL: string
   }
 }
 
