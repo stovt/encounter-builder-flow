@@ -1,2 +1,2 @@
 // @flow
-export { default } from './AddMonsterButton.component';
+export { default } from './AddMonsterButton.container';

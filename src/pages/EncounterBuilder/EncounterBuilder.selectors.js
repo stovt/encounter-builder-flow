@@ -1,6 +1,6 @@
 // @flow
 import type { State, ErrorType } from 'shared/types';
-import type { Monsters, PartyLevels } from 'shared/types/encounterBuilder';
+import type { Monsters, PartyLevels, Groups } from 'shared/types/encounterBuilder';
 
 export const getMonsters = (state: State): Monsters => (
   state.encounterBuilder.monsters
@@ -13,4 +13,7 @@ export const getError = (state: State): ?ErrorType => (
 );
 export const getPartyLevels = (state: State): PartyLevels => (
   state.encounterBuilder.partyLevels
+);
+export const getGroups = (state: State): Groups => (
+  state.encounterBuilder.groups
 );

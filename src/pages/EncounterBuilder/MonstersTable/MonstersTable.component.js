@@ -78,7 +78,7 @@ class MonstersTable extends React.PureComponent<Props> {
       Header: '',
       accessor: 'id',
       width: 50,
-      Cell: ({ value }: { value: string }) => <AddMonsterButton monsterId={value} />,
+      Cell: ({ value }: { value: string }) => <AddMonsterButton monsterID={value} />,
       sortable: false,
       filterable: false,
       style: { justifyContent: 'center' }

@@ -1,12 +1,19 @@
 // @flow
 import React from 'react';
+import type { EncounterBuilderAction } from 'shared/types/encounterBuilder';
 import { IconWrapper, PlusIcon } from 'shared/components/Icons';
 import { StyledButton } from 'shared/components/forms';
 
-class AddMonsterButton extends React.PureComponent<{ monsterId: string }> {
+type Props = {
+  monsterID: string,
+  addMonsterToGroup: (monsterID: string) => EncounterBuilderAction,
+}
+
+class AddMonsterButton extends React.PureComponent<Props> {
   handleOnClick = (e: SyntheticEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    alert(`clicked on add btn: ${this.props.monsterId}`);
+    const { addMonsterToGroup, monsterID } = this.props;
+    addMonsterToGroup(monsterID);
   }
 
   render() {

@@ -1,2 +1,2 @@
 // @flow
-export { default } from './EncounterInfo.component';
+export { default } from './EncounterInfo.container';

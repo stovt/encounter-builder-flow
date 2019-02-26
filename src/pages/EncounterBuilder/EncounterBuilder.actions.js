@@ -9,6 +9,8 @@ export const ADD_PARTY_LEVEL = 'encounterBuilder/ADD_PARTY_LEVEL';
 export const REMOVE_PARTY_LEVEL = 'encounterBuilder/REMOVE_PARTY_LEVEL';
 export const SET_PARTY_LEVEL = 'encounterBuilder/SET_PARTY_LEVEL';
 export const SET_PARTY_PLAYER_COUNT = 'encounterBuilder/SET_PARTY_PLAYER_COUNT';
+export const ADD_MONSTER_TO_GROUP = 'encounterBuilder/ADD_MONSTER_TO_GROUP';
+export const SET_MONSTER_QTY = 'encounterBuilder/SET_MONSTER_QTY';
 
 export const fetchAllMonsters = (): EncounterBuilderAction => ({ type: FETCH_ALL_MONSTERS });
 export const fetchAllMonstersSuccess = (monsters: Monsters): EncounterBuilderAction => ({
@@ -28,4 +30,10 @@ export const setPartyLevel = (value: number, id: string): EncounterBuilderAction
 });
 export const setPartyPlayerCount = (value: number, id: string): EncounterBuilderAction => ({
   type: SET_PARTY_PLAYER_COUNT, value, id
+});
+export const addMonsterToGroup = (monsterID: string): EncounterBuilderAction => ({
+  type: ADD_MONSTER_TO_GROUP, monsterID
+});
+export const setMonsterQTY = (monsterID: string, qty: number): EncounterBuilderAction => ({
+  type: SET_MONSTER_QTY, monsterID, qty
 });

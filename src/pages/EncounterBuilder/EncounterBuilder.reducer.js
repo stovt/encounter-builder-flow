@@ -4,7 +4,8 @@ import type { EncounterBuilder } from 'shared/types/encounterBuilder';
 import type { Action } from 'shared/types';
 import {
   FETCH_ALL_MONSTERS, FETCH_ALL_MONSTERS_SUCCESS, FETCH_ALL_MONSTERS_ERROR,
-  ADD_PARTY_LEVEL, REMOVE_PARTY_LEVEL, SET_PARTY_LEVEL, SET_PARTY_PLAYER_COUNT
+  ADD_PARTY_LEVEL, REMOVE_PARTY_LEVEL, SET_PARTY_LEVEL, SET_PARTY_PLAYER_COUNT,
+  ADD_MONSTER_TO_GROUP, SET_MONSTER_QTY
 } from './EncounterBuilder.actions';
 import { PLAYER_LEVELS, DEFAULT_PARTY_LEVELS, NEW_PARTY_LEVEL } from './EncounterBuilder.constants';
 
@@ -12,7 +13,8 @@ const initialState: EncounterBuilder = {
   monsters: [],
   loading: false,
   error: null,
-  partyLevels: DEFAULT_PARTY_LEVELS
+  partyLevels: DEFAULT_PARTY_LEVELS,
+  groups: []
 };
 
 const encounterBuilderReducer = (
@@ -92,6 +94,59 @@ const encounterBuilderReducer = (
             playerCount: value
           },
           ...state.partyLevels.slice(state.partyLevels.findIndex(p => p.id === id) + 1)
+        ]
+      };
+    }
+    case ADD_MONSTER_TO_GROUP: {
+      const { monsterID } = action;
+      const monster = state.monsters.find(m => m._id === monsterID);
+      if (!monster) return state;
+      const monsterIndexInGroup = state.groups.findIndex(g => g.monster._id === monsterID);
+      if (monsterIndexInGroup === -1) {
+        return {
+          ...state,
+          groups: [
+            ...state.groups,
+            {
+              qty: 1,
+              monster
+            }
+          ]
+        };
+      }
+      return {
+        ...state,
+        groups: [
+          ...state.groups.slice(0, monsterIndexInGroup),
+          {
+            ...state.groups[monsterIndexInGroup],
+            qty: state.groups[monsterIndexInGroup].qty + 1
+          },
+          ...state.groups.slice(monsterIndexInGroup + 1)
+        ]
+      };
+    }
+    case SET_MONSTER_QTY: {
+      const { monsterID, qty } = action;
+      const monsterIndexInGroup = state.groups.findIndex(g => g.monster._id === monsterID);
+      if (qty === 0) {
+        return {
+          ...state,
+          groups: [
+            ...state.groups.slice(0, monsterIndexInGroup),
+            ...state.groups.slice(monsterIndexInGroup + 1)
+          ]
+        };
+      }
+      return {
+        ...state,
+        groups: [
+          ...state.groups.slice(0, monsterIndexInGroup),
+          {
+            ...state.groups[monsterIndexInGroup],
+            qty
+          },
+          ...state.groups.slice(monsterIndexInGroup + 1)
         ]
       };
     }

@@ -1,11 +1,23 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import type { EncounterBuilderAction, Groups } from 'shared/types/encounterBuilder';
 import StyledTitle from 'shared/components/Title';
+import GroupInfo from './GroupInfo';
 
-const EncounterInfo = () => (
+type Props = {
+  groups: Groups,
+  setMonsterQTY: (monsterID: string, qty: number) => EncounterBuilderAction
+}
+
+const EncounterInfo = ({ groups, setMonsterQTY }: Props) => (
   <div>
     <StyledTitle><FormattedMessage id="encounter-info.title" /></StyledTitle>
+    {!groups.length ? <div><FormattedMessage id="encounter-info.empty-groups-message" /></div>
+      : groups.map(group => (
+        <GroupInfo key={group.monster._id} group={group} setMonsterQTY={setMonsterQTY} />
+      ))
+    }
   </div>
 );
 

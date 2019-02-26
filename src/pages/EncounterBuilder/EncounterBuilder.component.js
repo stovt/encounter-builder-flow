@@ -40,6 +40,7 @@ class EncounterBuilder extends React.PureComponent<Props> {
               <EncounterInfo />
             </Col>
           </Row>
+          <Divider />
         </Col>
         <Col xs={12} sm={12} md={8}>
           <MonstersTable

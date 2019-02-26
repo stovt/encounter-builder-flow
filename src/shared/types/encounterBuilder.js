@@ -16,7 +16,8 @@ export type Monster = {
   data: {
     size: MonsterSize,
     type: string,
-    cr: MonsterCR
+    cr: MonsterCR,
+    exp: string
   }
 }
 export type Monsters = Monster[]
@@ -39,11 +40,19 @@ export type PartyLevel = {
 }
 export type PartyLevels = PartyLevel[]
 
+export type Group = {
+  qty: number,
+  monster: Monster
+}
+
+export type Groups = Group[]
+
 export type EncounterBuilder = {|
   +monsters: Monsters,
   +loading: boolean,
   +error: ?ErrorType,
-  +partyLevels: PartyLevels
+  +partyLevels: PartyLevels,
+  groups: Groups
 |};
 
 export type EncounterBuilderState = {
@@ -57,4 +66,6 @@ export type EncounterBuilderAction =
   | { type: 'encounterBuilder/ADD_PARTY_LEVEL' }
   | { type: 'encounterBuilder/REMOVE_PARTY_LEVEL', id: string }
   | { type: 'encounterBuilder/SET_PARTY_LEVEL', value: number, id: string }
-  | { type: 'encounterBuilder/SET_PARTY_PLAYER_COUNT', value: number, id: string };
+  | { type: 'encounterBuilder/SET_PARTY_PLAYER_COUNT', value: number, id: string }
+  | { type: 'encounterBuilder/ADD_MONSTER_TO_GROUP', monsterID: string }
+  | { type: 'encounterBuilder/SET_MONSTER_QTY', monsterID: string, qty: number };
