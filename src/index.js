@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { ThemeProvider } from 'styled-components';
+import BreakpointListener from './shared/components/BreakpointListener';
 import { GlobalStyles, theme } from './styles';
 import { history } from './store/middleware/routerMiddleware';
 import store from './store/createStore';
@@ -19,10 +20,12 @@ if (renderRoot) {
       <LocaleProvider>
         <ConnectedRouter history={history}>
           <ThemeProvider theme={theme}>
-            <>
-              <GlobalStyles />
-              <App />
-            </>
+            <BreakpointListener>
+              <>
+                <GlobalStyles />
+                <App />
+              </>
+            </BreakpointListener>
           </ThemeProvider>
         </ConnectedRouter>
       </LocaleProvider>

@@ -8,7 +8,8 @@ export type MonsterTableData = {
   name: string,
   size: MonsterSize,
   type: string,
-  cr: MonsterCR
+  cr: MonsterCR,
+  exp: string
 }
 export type Monster = {
   _id: string,

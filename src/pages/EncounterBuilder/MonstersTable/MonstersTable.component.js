@@ -3,17 +3,18 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import ReactTable from 'react-table';
-import './MonstersTable.css';
-import type { MonsterTableData } from 'shared/types/encounterBuilder';
-import { crValueToNumber } from './MonstersTable.helpers';
+import type { MonsterTableData, PartyLevels } from 'shared/types/encounterBuilder';
+import { crValueToNumber, getDangerZoneClass } from './MonstersTable.helpers';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZE_OPTIONS } from './MonstersTable.constants';
 import AddMonsterButton from './AddMonsterButton';
 import CRFilter from './CRFilter';
 import SizeFilter from './SizeFilter';
 import TypeFilter from './TypeFilter';
+import './MonstersTable.css';
 
 type Props = {
   monsters: MonsterTableData[],
+  partyLevels: PartyLevels,
   intl: IntlShape
 }
 type Filter = {
@@ -72,7 +73,7 @@ class MonstersTable extends React.PureComponent<Props> {
   })
 
   render() {
-    const { monsters, intl: { formatMessage } } = this.props;
+    const { monsters, partyLevels, intl: { formatMessage } } = this.props;
 
     const columns = [{
       Header: '',
@@ -88,6 +89,12 @@ class MonstersTable extends React.PureComponent<Props> {
     }, {
       Header: formatMessage({ id: 'monster.cr' }),
       accessor: 'cr',
+      getProps: (state: any, rowInfo: any) => {
+        if (!rowInfo) return {};
+        return {
+          className: getDangerZoneClass(partyLevels, Number(rowInfo.original.exp))
+        };
+      },
       width: 190,
       style: { justifyContent: 'center' },
       filterMethod: this.CRFilterMethod,

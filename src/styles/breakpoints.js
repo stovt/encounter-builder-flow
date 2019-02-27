@@ -1,7 +1,14 @@
 // @flow
 import { css, type Interpolation, type CSSConstructor } from 'styled-components';
 
-const breakpoints = (obj: { [string]: number }, unit: string): { [string]: CSSConstructor } => {
+export type Breakpoints = {|
+  xs: number,
+  sm: number,
+  md: number,
+  lg: number
+|};
+
+const breakpoints = (obj: Breakpoints, unit: string): { [string]: CSSConstructor } => {
   const keys: string[] = Object.keys(obj);
   return keys.reduce((l, a, i) => ({
     ...l,

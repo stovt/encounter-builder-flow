@@ -8,4 +8,8 @@ export default styled.div`
   & + & {
     margin-top: 20px;
   }
+
+  & > div + div {
+    margin-left: 10px;
+  }
 `;

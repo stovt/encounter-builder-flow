@@ -1,6 +1,7 @@
 // @flow
 import { type CSSConstructor } from 'styled-components';
 import breakpoints from './breakpoints';
+import type { Breakpoints } from './breakpoints';
 
 type ObjMap<N = string> = {
   [string]: N
@@ -12,8 +13,8 @@ export type Theme = {
     gutterWidth: number,
     outerMargin: number,
     mediaQuery: string,
-    container: ObjMap<number>,
-    breakpoints: ObjMap<number>
+    container: $Shape<Breakpoints>,
+    breakpoints: Breakpoints
   },
   breakpoints: {
     [string]: CSSConstructor
@@ -23,7 +24,7 @@ export type Theme = {
 const theme: Theme = {};
 
 theme.fonts = {};
-theme.fonts.main = 'Open Sans';
+theme.fonts.main = 'Roboto';
 
 theme.fontSize = {};
 theme.fontSize.bodyValue = 14;
@@ -48,6 +49,15 @@ theme.colors.input = {};
 theme.colors.input.border = '#dde3e8';
 theme.colors.input.focusBorder = '#197aad';
 theme.colors.input.focusShadow = 'rgba(25, 122, 173, 0.5)';
+
+theme.colors.legend = {};
+theme.colors.legend.trivial = '#fff';
+theme.colors.legend.group = '#f7dfff';
+theme.colors.legend.pair = '#d9edf7';
+theme.colors.legend.easy = '##dff0d8';
+theme.colors.legend.medium = '#faf2cc';
+theme.colors.legend.hard = '#f6ce95';
+theme.colors.legend.deadly = '#eba5a3';
 
 theme.margins = {};
 theme.margins.small = '16px';

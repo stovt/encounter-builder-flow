@@ -4,11 +4,12 @@ import type { State, Dispatch } from 'shared/types';
 import {
   addPartyLevel, removePartyLevel, setPartyLevel, setPartyPlayerCount
 } from '../EncounterBuilder.actions';
-import { getPartyLevels } from '../EncounterBuilder.selectors';
+import { getPartyLevels, getGroups } from '../EncounterBuilder.selectors';
 import GroupInfo from './GroupInfo.component';
 
 const mapStateToProps = (state: State) => ({
-  partyLevels: getPartyLevels(state)
+  partyLevels: getPartyLevels(state),
+  groups: getGroups(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

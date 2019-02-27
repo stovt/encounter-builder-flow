@@ -25,7 +25,7 @@ const Party = ({
         <StyledPartyItem><b><FormattedMessage id="group-info.players" />:</b></StyledPartyItem>
         <StyledPartyItem><b><FormattedMessage id="group-info.level" />:</b></StyledPartyItem>
       </StyledParty>
-      {partyLevels.map(partyLevel => (
+      {partyLevels.map((partyLevel, index) => (
         <StyledParty key={partyLevel.id}>
           <StyledPartyItem>
             <Select
@@ -43,12 +43,14 @@ const Party = ({
               id={partyLevel.id}
             />
           </StyledPartyItem>
-          <StyledPartyItem>
-            <RemovePartyLevelButton
-              removePartyLevel={removePartyLevel}
-              id={partyLevel.id}
-            />
-          </StyledPartyItem>
+          {!!index && (
+            <StyledPartyItem>
+              <RemovePartyLevelButton
+                removePartyLevel={removePartyLevel}
+                id={partyLevel.id}
+              />
+            </StyledPartyItem>
+          )}
         </StyledParty>
       ))}
     </StyledPartyWrapper>
