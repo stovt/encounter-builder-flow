@@ -9,7 +9,7 @@ export type MonsterTableData = {
   size: MonsterSize,
   type: string,
   cr: MonsterCR,
-  exp: string
+  exp: number
 }
 export type Monster = {
   _id: string,
@@ -18,7 +18,13 @@ export type Monster = {
     size: MonsterSize,
     type: string,
     cr: MonsterCR,
-    exp: string
+    exp: string,
+    hp: string,
+    armor: string,
+    ac: string,
+    speed: string,
+    dex: string,
+    actions: string[] | string
   }
 }
 export type Monsters = Monster[]
@@ -68,5 +74,5 @@ export type EncounterBuilderAction =
   | { type: 'encounterBuilder/REMOVE_PARTY_LEVEL', id: string }
   | { type: 'encounterBuilder/SET_PARTY_LEVEL', value: number, id: string }
   | { type: 'encounterBuilder/SET_PARTY_PLAYER_COUNT', value: number, id: string }
-  | { type: 'encounterBuilder/ADD_MONSTER_TO_GROUP', monsterID: string }
-  | { type: 'encounterBuilder/SET_MONSTER_QTY', monsterID: string, qty: number };
+  | { type: 'encounterBuilder/ADD_MONSTER_TO_GROUP', monster: Monster }
+  | { type: 'encounterBuilder/SET_MONSTER_QTY', monster: Monster, qty: number };

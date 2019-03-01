@@ -98,10 +98,8 @@ const encounterBuilderReducer = (
       };
     }
     case ADD_MONSTER_TO_GROUP: {
-      const { monsterID } = action;
-      const monster = state.monsters.find(m => m._id === monsterID);
-      if (!monster) return state;
-      const monsterIndexInGroup = state.groups.findIndex(g => g.monster._id === monsterID);
+      const { monster } = action;
+      const monsterIndexInGroup = state.groups.findIndex(g => g.monster._id === monster._id);
       if (monsterIndexInGroup === -1) {
         return {
           ...state,
@@ -127,8 +125,8 @@ const encounterBuilderReducer = (
       };
     }
     case SET_MONSTER_QTY: {
-      const { monsterID, qty } = action;
-      const monsterIndexInGroup = state.groups.findIndex(g => g.monster._id === monsterID);
+      const { monster, qty } = action;
+      const monsterIndexInGroup = state.groups.findIndex(g => g.monster._id === monster._id);
       if (qty === 0) {
         return {
           ...state,

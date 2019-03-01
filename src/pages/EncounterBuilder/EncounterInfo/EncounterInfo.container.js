@@ -1,6 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import type { State, Dispatch } from 'shared/types';
+import type { Monster } from 'shared/types/encounterBuilder';
 import { addMonsterToGroup, setMonsterQTY } from '../EncounterBuilder.actions';
 import { getGroups } from '../EncounterBuilder.selectors';
 import EncounterInfo from './EncounterInfo.component';
@@ -10,8 +11,8 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addMonsterToGroup: (monsterID: string) => dispatch(addMonsterToGroup(monsterID)),
-  setMonsterQTY: (monsterID: string, qty: number) => dispatch(setMonsterQTY(monsterID, qty))
+  addMonsterToGroup: (monster: Monster) => dispatch(addMonsterToGroup(monster)),
+  setMonsterQTY: (monster: Monster, qty: number) => dispatch(setMonsterQTY(monster, qty))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EncounterInfo);

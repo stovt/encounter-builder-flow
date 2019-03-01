@@ -14,6 +14,7 @@ import EncounterInfo from './EncounterInfo';
 import Totals from './Totals';
 import Legend from './Legend';
 import MonstersTable from './MonstersTable';
+import BattleButton from './BattleButton';
 
 type Props = {
   monsters: Monsters,
@@ -58,6 +59,7 @@ class EncounterBuilder extends React.PureComponent<Props> {
               <Row>
                 <Col xs={12}>
                   <Totals groups={groups} partyLevels={partyLevels} />
+                  <BattleButton />
                 </Col>
               </Row>
             </>
@@ -85,7 +87,7 @@ class EncounterBuilder extends React.PureComponent<Props> {
                     size: monster.data.size,
                     type: monster.data.type,
                     cr: monster.data.cr,
-                    exp: monster.data.exp
+                    exp: Number(monster.data.exp)
                   }))
                 }
                 partyLevels={partyLevels}

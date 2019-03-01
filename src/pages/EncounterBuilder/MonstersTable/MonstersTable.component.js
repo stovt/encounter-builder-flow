@@ -92,7 +92,7 @@ class MonstersTable extends React.PureComponent<Props> {
       getProps: (state: any, rowInfo: any) => {
         if (!rowInfo) return {};
         return {
-          className: getDangerZoneClass(partyLevels, Number(rowInfo.original.exp))
+          className: getDangerZoneClass(partyLevels, rowInfo.original.exp)
         };
       },
       width: 190,

@@ -1,26 +1,26 @@
 // @flow
 import React from 'react';
-import type { EncounterBuilderAction } from 'shared/types/encounterBuilder';
+import type { EncounterBuilderAction, Monster } from 'shared/types/encounterBuilder';
 import { MinusIcon, PlusIcon } from 'shared/components/Icons';
 import StyledWrapper from './Wrapper';
 import StyledButton from './Button';
 import StyledInput from './Input.styled';
 
 type Props = {
-  monsterID: string,
+  monster: Monster,
   qty: number,
-  setMonsterQTY: (monsterID: string, qty: number) => EncounterBuilderAction
+  setMonsterQTY: (monster: Monster, qty: number) => EncounterBuilderAction
 }
 
 class Input extends React.PureComponent<Props> {
   handleOnClickMinus = () => {
-    const { setMonsterQTY, monsterID, qty } = this.props;
-    setMonsterQTY(monsterID, qty - 1);
+    const { setMonsterQTY, monster, qty } = this.props;
+    setMonsterQTY(monster, qty - 1);
   }
 
   handleOnClickPlus = () => {
-    const { setMonsterQTY, monsterID, qty } = this.props;
-    setMonsterQTY(monsterID, qty + 1);
+    const { setMonsterQTY, monster, qty } = this.props;
+    setMonsterQTY(monster, qty + 1);
   }
 
   render() {

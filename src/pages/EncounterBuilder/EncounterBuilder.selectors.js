@@ -1,9 +1,14 @@
 // @flow
 import type { State, ErrorType } from 'shared/types';
-import type { Monsters, PartyLevels, Groups } from 'shared/types/encounterBuilder';
+import type {
+  Monster, Monsters, PartyLevels, Groups
+} from 'shared/types/encounterBuilder';
 
 export const getMonsters = (state: State): Monsters => (
   state.encounterBuilder.monsters
+);
+export const getMonsterByID = (state: State, monsterID: string): ?Monster => (
+  state.encounterBuilder.monsters.find(monster => monster._id === monsterID)
 );
 export const isLoading = (state: State): boolean => (
   state.encounterBuilder.loading

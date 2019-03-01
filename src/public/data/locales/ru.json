@@ -28,7 +28,7 @@
     "total-xp": "Всего опыта: {exp}",
     "adjusted-xp": "Урегулированый опыт: {exp}",
     "exp-per-player": "({exp} на игрока)",
-    "battle": "Бой"
+    "battle-btn": "В бой!"
   },
   "legend": {
     "title": "Легенда",
@@ -85,6 +85,17 @@
       "swarm": "Рой",
       "titan": "Титан"
     },
-    "alignment": "Мировозрение"
+    "alignment": "Мировозрение",
+    "hit-points": "Здоровье",
+    "armor": "Броня",
+    "armor-class": "класс брони",
+    "initiative": "Инициатива",
+    "speed": "Скорость",
+    "actions": "Действия",
+    "state": "Состояние"
+  },
+  "encounter-battle": {
+    "title": "Встреча",
+    "back": "Назад"
   }
 }
