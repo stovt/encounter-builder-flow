@@ -5,6 +5,6 @@ export default styled.div`
   font-size: 16px;
 
   & div + div {
-    margin-left: 10px;
+    margin-left: ${props => props.theme.margins.medium};
   }
 `;

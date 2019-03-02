@@ -12,7 +12,7 @@ const rightBtnStyles = css`
 
 export default styled(IconWrapper)`
   ${IconUtils.colorOverrideCss('#929292')}
-  padding: 10px;
+  padding: ${props => props.theme.paddings.medium};
   background-color: #f3f3f3;
   color: #929292;
   cursor: pointer;

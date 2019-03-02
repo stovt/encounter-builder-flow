@@ -9,8 +9,11 @@ import { GlobalStyles, theme } from './styles';
 import { history } from './store/middleware/routerMiddleware';
 import store from './store/createStore';
 import LocaleProvider from './shared/locale';
+import 'react-table/react-table.css';
+import './table.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
 
 const renderRoot = document.getElementById('root');
 

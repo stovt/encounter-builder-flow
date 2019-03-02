@@ -9179,6 +9179,13 @@ react-app-polyfill@^0.2.1:
     raf "3.4.1"
     whatwg-fetch "3.0.0"
 
+react-calculator-input@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-calculator-input/-/react-calculator-input-1.1.1.tgz#a3e379ea5a8e7d0e9a0f45bf8c38b50aebee9593"
+  integrity sha512-fjUYNnfVBWSA1HRNhdlx6lCH/cwc2MQH4t/lDLUKl6rc3vTVNYmyJbXRBOa4bMHXFAuZFnEy8mgc1+bx7rjIgA==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-dev-utils@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-7.0.3.tgz#f1316cfffd792fd41b0c28ad5db86c1d74484d6f"

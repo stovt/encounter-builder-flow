@@ -6,6 +6,6 @@ export default styled(StyledButton)`
   margin-top: 10px;
 
   & svg {
-    margin-right: 5px;
+    margin-right: ${props => props.theme.margins.small};
   }
 `;

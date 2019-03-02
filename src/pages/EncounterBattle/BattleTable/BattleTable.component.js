@@ -4,14 +4,25 @@ import { injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import ReactTable from 'react-table';
 import type { BattleMonster, BattleMonsters } from 'shared/types/encounterBattle';
-import './BattleTable.css';
+import HPInput from './HPInput';
 
 type Props = {
   monsters: BattleMonsters,
+  turn: number,
   intl: IntlShape
 }
 
 class BattleTable extends React.PureComponent<Props> {
+  handleTrProps = (state: any, { index }: any) => {
+    const { turn } = this.props;
+    return {
+      style: {
+        cursor: 'auto',
+        background: turn === index ? '#e4e4e4' : 'inherit'
+      }
+    };
+  }
+
   render() {
     const { monsters, intl: { formatMessage } } = this.props;
 
@@ -22,6 +33,9 @@ class BattleTable extends React.PureComponent<Props> {
     }, {
       Header: formatMessage({ id: 'monster.hit-points' }),
       accessor: 'monster.hp',
+      Cell: (
+        { original: { id: rowID }, value }: { original: any, value: string | number }
+      ) => <HPInput rowID={rowID} value={value} />,
       width: 100,
       style: { justifyContent: 'center' }
     }, {
@@ -70,6 +84,7 @@ class BattleTable extends React.PureComponent<Props> {
         rowsText={formatMessage({ id: 'table-labels.rowsText' })}
         pageJumpText={formatMessage({ id: 'table-labels.pageJumpText' })}
         rowsSelectorText={formatMessage({ id: 'table-labels.rowsSelectorText' })}
+        getTrProps={this.handleTrProps}
       />
     );
   }

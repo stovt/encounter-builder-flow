@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+export const bigBtnStyles = css`
+  font-size: 20px;
+  padding: 10px;
+`;
 
 export default styled.button`
   display: block;
@@ -6,7 +11,7 @@ export default styled.button`
   transition: all 0.1s ease;
   cursor: pointer;
   outline: none;
-  padding: 5px;
+  padding: ${props => props.theme.paddings.small};
   border-radius: 4px;
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 ${props => props.theme.colors.btn.shadow};

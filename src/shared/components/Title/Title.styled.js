@@ -6,7 +6,7 @@ const centerStyles = css`
 
 export default styled.h2`
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: ${props => props.theme.margins.medium};
   font-size: ${props => props.theme.fontSize.title};
   font-weight: normal;
   line-height: 1;

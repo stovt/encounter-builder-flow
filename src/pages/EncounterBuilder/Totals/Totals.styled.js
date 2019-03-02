@@ -5,6 +5,6 @@ export default styled.div`
   justify-content: space-between;
 
   & div + div {
-    margin-left: 10px;
+    margin-left: ${props => props.theme.margins.medium};
   }
 `;

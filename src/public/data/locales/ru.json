@@ -96,6 +96,7 @@
   },
   "encounter-battle": {
     "title": "Встреча",
-    "back": "Назад"
+    "back": "Назад",
+    "next-turn": "Следующий ход"
   }
 }

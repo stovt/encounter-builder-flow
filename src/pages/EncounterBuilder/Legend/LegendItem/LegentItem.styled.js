@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export default styled.li`
-  padding: 5px;
+  padding: ${props => props.theme.paddings.small};
 `;

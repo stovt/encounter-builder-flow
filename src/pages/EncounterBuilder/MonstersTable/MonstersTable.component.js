@@ -10,7 +10,6 @@ import AddMonsterButton from './AddMonsterButton';
 import CRFilter from './CRFilter';
 import SizeFilter from './SizeFilter';
 import TypeFilter from './TypeFilter';
-import './MonstersTable.css';
 
 type Props = {
   monsters: MonsterTableData[],
@@ -137,6 +136,7 @@ class MonstersTable extends React.PureComponent<Props> {
         rowsSelectorText={formatMessage({ id: 'table-labels.rowsSelectorText' })}
         defaultFilterMethod={this.defaultFilterMethod}
         getTdProps={this.handleGetTDprops}
+        className="-highlight"
       />
     );
   }

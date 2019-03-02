@@ -60,14 +60,14 @@ theme.colors.legend.hard = '#f6ce95';
 theme.colors.legend.deadly = '#eba5a3';
 
 theme.margins = {};
-theme.margins.small = '16px';
-theme.margins.medium = '24px';
-theme.margins.large = '40px';
+theme.margins.small = '5px';
+theme.margins.medium = '10px';
+theme.margins.large = '20px';
 
 theme.paddings = {};
-theme.paddings.small = '16px';
-theme.paddings.medium = '24px';
-theme.paddings.large = '40px';
+theme.paddings.small = '5px';
+theme.paddings.medium = '10px';
+theme.paddings.large = '20px';
 theme.paddings.btn = '16px';
 theme.paddings.smallBtn = '12px';
 theme.paddings.input = '22px 10px 6px';

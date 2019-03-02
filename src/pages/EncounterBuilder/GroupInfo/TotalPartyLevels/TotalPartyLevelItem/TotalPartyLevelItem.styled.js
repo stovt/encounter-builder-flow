@@ -4,6 +4,6 @@ export default styled.li`
   font-weight: ${props => (props.bold ? 'bold' : 'normal')};
 
   &:last-child {
-    margin-top: 10px;
+    margin-top: ${props => props.theme.margins.medium};
   }
 `;

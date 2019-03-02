@@ -6,10 +6,10 @@ export default styled.div`
   align-items: center;
 
   & + & {
-    margin-top: 20px;
+    margin-top: ${props => props.theme.margins.large};
   }
 
   & > div + div {
-    margin-left: 10px;
+    margin-left: ${props => props.theme.margins.medium};
   }
 `;

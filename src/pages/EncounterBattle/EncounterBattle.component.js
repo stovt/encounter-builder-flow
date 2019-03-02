@@ -5,7 +5,9 @@ import { Col, Row } from 'react-styled-flexboxgrid';
 import type { BattleMonsters } from 'shared/types/encounterBattle';
 import StyledTitle from 'shared/components/Title';
 import BattleTable from './BattleTable';
+import ButtonsWrapper from './ButtonsWrapper';
 import BackButton from './BackButton';
+import NextTurnButton from './NextTurnButton';
 
 const EncounterBattle = ({ monsters }: { monsters: BattleMonsters }) => {
   if (!monsters.length) return null;
@@ -21,9 +23,14 @@ const EncounterBattle = ({ monsters }: { monsters: BattleMonsters }) => {
         <Row>
           <Col xs={12}>
             <BattleTable monsters={monsters} />
-            <div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <ButtonsWrapper>
               <BackButton />
-            </div>
+              <NextTurnButton />
+            </ButtonsWrapper>
           </Col>
         </Row>
       </Col>
