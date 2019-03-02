@@ -98,7 +98,7 @@ const encounterBattleReducer = (
     case NEXT_TURN:
       return {
         ...state,
-        turn: state.turn + 1
+        turn: state.turn === state.monsters.length - 1 ? 0 : state.turn + 1
       };
     default:
       return state;
