@@ -5,6 +5,7 @@ import type { IntlShape } from 'react-intl';
 import ReactTable from 'react-table';
 import type { BattleMonster, BattleMonsters } from 'shared/types/encounterBattle';
 import HPInput from './HPInput';
+import StateMultiSelect from './StateMultiSelect';
 
 type Props = {
   monsters: BattleMonsters,
@@ -65,6 +66,13 @@ class BattleTable extends React.PureComponent<Props> {
         return value;
       },
       style: { flexDirection: 'column', alignItems: 'normal' }
+    }, {
+      Header: formatMessage({ id: 'monster.state' }),
+      accessor: 'monster.state',
+      Cell: (
+        { original: { id: rowID }, value }: { original: any, value: string | number }
+      ) => <StateMultiSelect rowID={rowID} value={value} />,
+      width: 240
     }];
 
     return (

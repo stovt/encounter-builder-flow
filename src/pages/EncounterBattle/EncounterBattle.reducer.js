@@ -5,7 +5,7 @@ import type { EncounterBattle, BattleMonster } from 'shared/types/encounterBattl
 import type { Action } from 'shared/types';
 import { ADD_MONSTER_TO_GROUP, SET_MONSTER_QTY } from 'pages/EncounterBuilder/EncounterBuilder.actions';
 import { getInitiative } from './EncounterBattle.helpers';
-import { SET_MONSTER_HP, NEXT_TURN } from './EncounterBattle.actions';
+import { SET_MONSTER_HP, SET_MONSTER_STATE, NEXT_TURN } from './EncounterBattle.actions';
 
 const modifyMonsterData = (monster: Monster): { id: string, monster: BattleMonster } => ({
   id: v4(),
@@ -22,7 +22,8 @@ const modifyMonsterData = (monster: Monster): { id: string, monster: BattleMonst
     speed: monster.data.speed,
     dex: Number(monster.data.dex),
     actions: monster.data.actions,
-    initiative: getInitiative(Number(monster.data.dex))
+    initiative: getInitiative(Number(monster.data.dex)),
+    state: []
   }
 });
 
@@ -87,6 +88,29 @@ const encounterBattleReducer = (
               monster: {
                 ...monsterData.monster,
                 hp
+              }
+            },
+            ...state.monsters.slice(state.monsters.findIndex(m => m.id === rowID) + 1)
+          ]
+        };
+      }
+      return state;
+    }
+    case SET_MONSTER_STATE: {
+      const { rowID, state: monsterState } = action;
+
+      const monsterData = state.monsters.find(data => data.id === rowID);
+
+      if (monsterData) {
+        return {
+          ...state,
+          monsters: [
+            ...state.monsters.slice(0, state.monsters.findIndex(m => m.id === rowID)),
+            {
+              id: rowID,
+              monster: {
+                ...monsterData.monster,
+                state: monsterState
               }
             },
             ...state.monsters.slice(state.monsters.findIndex(m => m.id === rowID) + 1)

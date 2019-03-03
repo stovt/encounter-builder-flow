@@ -8,6 +8,14 @@ type ObjMap<N = string> = {
 }
 export type Theme = {
   [string]: ObjMap<> | ObjMap<number>,
+  colors: {
+    [string]: string,
+    btn: ObjMap<>,
+    input: ObjMap<>,
+    legend: ObjMap<>
+  },
+  margins: ObjMap<>,
+  paddings: ObjMap<>,
   flexboxgrid: {
     gridSize: number,
     gutterWidth: number,
@@ -44,8 +52,8 @@ theme.colors.btn = {};
 theme.colors.btn.prime1 = '#da3319';
 theme.colors.btn.prime2 = '#eb4930';
 theme.colors.btn.shadow = 'rgba(60, 18, 6, 0.16)';
-theme.colors.input = {};
 
+theme.colors.input = {};
 theme.colors.input.border = '#dde3e8';
 theme.colors.input.focusBorder = '#197aad';
 theme.colors.input.focusShadow = 'rgba(25, 122, 173, 0.5)';
