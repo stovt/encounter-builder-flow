@@ -4,6 +4,7 @@ import { Col, Grid, Row } from 'react-styled-flexboxgrid';
 import { Switch } from 'react-router-dom';
 import Route from 'shared/components/Route';
 import LoadingComponent from 'shared/components/LoadingComponent';
+import MonsterInfoModal from 'shared/components/MonsterInfoModal';
 
 const EncounterBuilder = lazy(() => import(/* webpackChunkName: 'encounterBuilder' */'./pages/EncounterBuilder'));
 const EncounterBattle = lazy(() => import(/* webpackChunkName: 'encounterBattle' */'./pages/EncounterBattle'));
@@ -18,6 +19,7 @@ const App = () => (
             <Route path="/encounter-battle" component={EncounterBattle} />
           </Switch>
         </Suspense>
+        <MonsterInfoModal />
       </Col>
     </Row>
   </Grid>

@@ -7,7 +7,7 @@ export const customStyles: StylesConfig = {
     ...styles,
     width: '100%'
   }),
-  control: (styles, { selectProps: { menuIsOpen }, isFocused }) => console.log(styles) || ({
+  control: (styles, { selectProps: { menuIsOpen }, isFocused }) => ({
     ...styles,
     borderRadius: menuIsOpen ? '4px 4px 0 0' : 4,
     borderColor: isFocused ? theme.colors.input.focusBorder : theme.colors.input.border,
@@ -18,7 +18,7 @@ export const customStyles: StylesConfig = {
       boxShadow: isFocused ? '0 4px 16px 0 '.concat(theme.colors.input.focusShadow) : null
     }
   }),
-  dropdownIndicator: (styles, { selectProps: { menuIsOpen } }) => console.log(styles) || ({
+  dropdownIndicator: (styles, { selectProps: { menuIsOpen } }) => ({
     ...styles,
     transition: 'all .2s ease',
     transform: menuIsOpen ? 'rotate(180deg)' : null

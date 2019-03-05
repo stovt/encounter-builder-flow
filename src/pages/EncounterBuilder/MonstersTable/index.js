@@ -1,2 +1,2 @@
 // @flow
-export { default } from './MonstersTable.component';
+export { default } from './MonstersTable.container';

@@ -3,17 +3,21 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import ReactTable from 'react-table';
-import type { MonsterTableData, PartyLevels } from 'shared/types/encounterBuilder';
-import { crValueToNumber, getDangerZoneClass } from './MonstersTable.helpers';
-import { DEFAULT_PAGE_SIZE, PAGE_SIZE_OPTIONS } from './MonstersTable.constants';
+import type { Monster, MonsterTableData, PartyLevels } from 'shared/types/encounterBuilder';
+import type { ModalsAction } from 'shared/types/modals';
+import { MONSTER_INFO_MODAL_ID } from 'shared/components/MonsterInfoModal/MonsterInfoModal.constants';
 import AddMonsterButton from './AddMonsterButton';
 import CRFilter from './CRFilter';
 import SizeFilter from './SizeFilter';
 import TypeFilter from './TypeFilter';
+import { crValueToNumber, getDangerZoneClass } from './MonstersTable.helpers';
+import { DEFAULT_PAGE_SIZE, PAGE_SIZE_OPTIONS } from './MonstersTable.constants';
 
 type Props = {
   monsters: MonsterTableData[],
   partyLevels: PartyLevels,
+  showModal: (modalId: string, data: { monster: Monster }) => ModalsAction,
+  getMonsterByID: (monsterID: string) => ?Monster,
   intl: IntlShape
 }
 type Filter = {
@@ -64,9 +68,13 @@ class MonstersTable extends React.PureComponent<Props> {
     return row[id] !== undefined ? String(row[id]).startsWith(filter.value) : true;
   }
 
-  handleGetTDprops = (state: any, rowInfo: any): {} => ({
+  handleTdProps = (state: any, rowInfo: any, column: any): {} => ({
     onClick: (e, handleOriginal) => {
-      alert(rowInfo.original.id);
+      if (column.id !== 'id') {
+        const { getMonsterByID, showModal } = this.props;
+        const monster = getMonsterByID(rowInfo.original.id);
+        if (monster) showModal(MONSTER_INFO_MODAL_ID, { monster });
+      }
       if (handleOriginal) handleOriginal();
     }
   })
@@ -135,7 +143,7 @@ class MonstersTable extends React.PureComponent<Props> {
         pageJumpText={formatMessage({ id: 'table-labels.pageJumpText' })}
         rowsSelectorText={formatMessage({ id: 'table-labels.rowsSelectorText' })}
         defaultFilterMethod={this.defaultFilterMethod}
-        getTdProps={this.handleGetTDprops}
+        getTdProps={this.handleTdProps}
         className="-highlight"
       />
     );

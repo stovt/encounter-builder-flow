@@ -20,11 +20,22 @@ export type Monster = {
     cr: MonsterCR,
     exp: string,
     hp: string,
+    hpDice: string,
     armor: string,
     ac: string,
     speed: string,
+    skills: string,
+    senses: string,
+    languages: string,
+    str: string,
     dex: string,
-    actions: string[] | string
+    con: string,
+    int: string,
+    wis: string,
+    cha: string,
+    additionalStats: string[] | string,
+    actions: string[] | string,
+    alignment: string
   }
 }
 export type Monsters = Monster[]

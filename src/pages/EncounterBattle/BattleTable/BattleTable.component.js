@@ -3,13 +3,18 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import ReactTable from 'react-table';
+import type { Monster } from 'shared/types/encounterBuilder';
 import type { BattleMonster, BattleMonsters } from 'shared/types/encounterBattle';
+import type { ModalsAction } from 'shared/types/modals';
+import { MONSTER_INFO_MODAL_ID } from 'shared/components/MonsterInfoModal/MonsterInfoModal.constants';
 import HPInput from './HPInput';
 import StateMultiSelect from './StateMultiSelect';
 
 type Props = {
   monsters: BattleMonsters,
   turn: number,
+  showModal: (modalId: string, data: { monster: Monster }) => ModalsAction,
+  getMonsterByID: (monsterID: string) => ?Monster,
   intl: IntlShape
 }
 
@@ -24,13 +29,27 @@ class BattleTable extends React.PureComponent<Props> {
     };
   }
 
+  handleTdProps = (state: any, rowInfo: any, column: any): {} => ({
+    onClick: (e, handleOriginal) => {
+      if (column.id === 'monster.name') {
+        const { getMonsterByID, showModal } = this.props;
+        const monster = getMonsterByID(rowInfo.original.monster.id);
+        if (monster) showModal(MONSTER_INFO_MODAL_ID, { monster });
+      }
+      if (handleOriginal) handleOriginal();
+    }
+  })
+
   render() {
     const { monsters, intl: { formatMessage } } = this.props;
 
     const columns = [{
       Header: formatMessage({ id: 'monster.name' }),
       accessor: 'monster.name',
-      width: 250
+      width: 250,
+      style: {
+        cursor: 'pointer'
+      }
     }, {
       Header: formatMessage({ id: 'monster.hit-points' }),
       accessor: 'monster.hp',
@@ -54,6 +73,13 @@ class BattleTable extends React.PureComponent<Props> {
       accessor: 'monster.speed',
       width: 160
     }, {
+      Header: formatMessage({ id: 'monster.state' }),
+      accessor: 'monster.state',
+      Cell: (
+        { original: { id: rowID }, value }: { original: any, value: string | number }
+      ) => <StateMultiSelect rowID={rowID} value={value} />,
+      width: 240
+    }, {
       Header: formatMessage({ id: 'monster.actions' }),
       accessor: 'monster.actions',
       Cell: ({ value }: { value: string[] | string }) => {
@@ -66,13 +92,6 @@ class BattleTable extends React.PureComponent<Props> {
         return value;
       },
       style: { flexDirection: 'column', alignItems: 'normal' }
-    }, {
-      Header: formatMessage({ id: 'monster.state' }),
-      accessor: 'monster.state',
-      Cell: (
-        { original: { id: rowID }, value }: { original: any, value: string | number }
-      ) => <StateMultiSelect rowID={rowID} value={value} />,
-      width: 240
     }];
 
     return (
@@ -93,6 +112,7 @@ class BattleTable extends React.PureComponent<Props> {
         pageJumpText={formatMessage({ id: 'table-labels.pageJumpText' })}
         rowsSelectorText={formatMessage({ id: 'table-labels.rowsSelectorText' })}
         getTrProps={this.handleTrProps}
+        getTdProps={this.handleTdProps}
       />
     );
   }

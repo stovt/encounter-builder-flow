@@ -4,8 +4,9 @@ import { injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import Select from 'react-select';
 import type { EncounterBattleAction, BattleMonster } from 'shared/types/encounterBattle';
-import { SELECT_OPTIONS } from './StateMultiSelect.constants';
+import { MONSTER_STATES } from './StateMultiSelect.constants';
 import { customStyles } from './StateMultiSelect.styled';
+import MultiValueLabel from './MultiValueLabel';
 
 declare var document: any;
 
@@ -25,12 +26,17 @@ class StateMultiSelect extends React.PureComponent<Props> {
   render() {
     const { value, intl: { formatMessage } } = this.props;
 
+    const options = MONSTER_STATES.map(state => ({
+      label: formatMessage({ id: `monster.states.${state}` }),
+      value: state
+    }));
+
     return (
       <Select
-        defaultValue={[SELECT_OPTIONS[2], SELECT_OPTIONS[3]]}
         isMulti
         name="colors"
-        options={SELECT_OPTIONS}
+        options={options}
+        components={{ MultiValueLabel }}
         // $FlowFixMe
         onChange={this.handleOnChange}
         value={value}

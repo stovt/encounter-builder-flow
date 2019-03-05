@@ -10,7 +10,26 @@ import BackButton from './BackButton';
 import NextTurnButton from './NextTurnButton';
 
 const EncounterBattle = ({ monsters }: { monsters: BattleMonsters }) => {
-  if (!monsters.length) return null;
+  if (!monsters.length) {
+    return (
+      <Row>
+        <Col xs={12}>
+          <Row>
+            <Col xs={12}>
+              <StyledTitle center><FormattedMessage id="encounter-battle.add-monsters-before-start-battle" /></StyledTitle>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <ButtonsWrapper>
+                <BackButton />
+              </ButtonsWrapper>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    );
+  }
 
   return (
     <Row>

@@ -5,9 +5,7 @@ import variables from './variables';
 
 const GlobalGridStyles = createGlobalStyle`
   ${Grid} {
-    padding-top: ${variables.flexboxgrid.gutterWidth / 2}rem;
-    padding-left: ${variables.flexboxgrid.gutterWidth / 2}rem;
-    padding-right: ${variables.flexboxgrid.gutterWidth / 2}rem;
+    padding: ${variables.flexboxgrid.gutterWidth / 2}rem;
   }
 `;
 

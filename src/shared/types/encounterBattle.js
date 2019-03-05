@@ -24,7 +24,8 @@ export type BattleMonsters = Array<{
 
 export type EncounterBattle = {|
   +monsters: BattleMonsters,
-  +turn: number
+  +turn: number,
+  +battleStarted: boolean
 |};
 
 export type EncounterBattleState = {
