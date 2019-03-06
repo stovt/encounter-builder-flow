@@ -61,7 +61,7 @@ class BattleTable extends React.PureComponent<Props> {
     }, {
       Header: `${formatMessage({ id: 'monster.armor' })} (${formatMessage({ id: 'monster.armor-class' })})`,
       accessor: 'monster',
-      Cell: ({ value }: { value: BattleMonster }) => `${value.armor} (${value.ac})`,
+      Cell: ({ value }: { value: BattleMonster }) => (value.armor ? `${value.armor} (${value.ac})` : value.ac),
       width: 160
     }, {
       Header: formatMessage({ id: 'monster.initiative' }),

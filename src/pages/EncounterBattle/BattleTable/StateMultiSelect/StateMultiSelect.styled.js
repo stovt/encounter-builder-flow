@@ -31,5 +31,9 @@ export const customStyles: StylesConfig = {
   menuList: styles => ({
     ...styles,
     padding: 0
+  }),
+  multiValueLabel: styles => ({
+    ...styles,
+    whiteSpace: 'normal'
   })
 };
