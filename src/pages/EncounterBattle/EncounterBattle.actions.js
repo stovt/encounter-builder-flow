@@ -1,10 +1,15 @@
 // @flow
-import type { EncounterBattleAction, MonsterState } from 'shared/types/encounterBattle';
+import type { EncounterBattleAction } from 'shared/types/encounterBattle';
+import type { Monster, MonsterState } from 'shared/types/monsters';
 
+export const ADD_MONSTER_TO_BATTLE_TABLE = 'encounterBattle/ADD_MONSTER_TO_BATTLE_TABLE';
 export const SET_MONSTER_HP = 'encounterBattle/SET_MONSTER_HP';
 export const SET_MONSTER_STATE = 'encounterBattle/SET_MONSTER_STATE';
 export const NEXT_TURN = 'encounterBattle/NEXT_TURN';
 
+export const addMonsterToBattleTable = (monster: Monster): EncounterBattleAction => ({
+  type: ADD_MONSTER_TO_BATTLE_TABLE, monster
+});
 export const setMonsterHP = (rowID: string, hp: number): EncounterBattleAction => ({
   type: SET_MONSTER_HP, rowID, hp
 });

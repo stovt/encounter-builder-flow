@@ -1,2 +1,2 @@
 // @flow
-export { default } from './Input.component';
+export { default } from './Input.container';

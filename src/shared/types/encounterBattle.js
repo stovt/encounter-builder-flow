@@ -1,29 +1,8 @@
 // @flow
-import type { MonsterTableData } from './encounterBuilder';
-
-export type MonsterState = Array<{
-  label: string,
-  value: string
-}>
-
-export type BattleMonster = MonsterTableData & {
-  hp: number,
-  armor: string,
-  ac: number,
-  speed: string,
-  dex: number,
-  actions: string[] | string,
-  initiative: number,
-  state: MonsterState
-}
-
-export type BattleMonsters = Array<{
-  id: string,
-  monster: BattleMonster
-}>
+import type { BattleMonsterRows, Monster, MonsterState } from './monsters';
 
 export type EncounterBattle = {|
-  +monsters: BattleMonsters,
+  +monsters: BattleMonsterRows,
   +turn: number,
   +battleStarted: boolean
 |};
@@ -33,6 +12,7 @@ export type EncounterBattleState = {
 };
 
 export type EncounterBattleAction =
+  | { type: 'encounterBattle/ADD_MONSTER_TO_BATTLE_TABLE', monster: Monster }
   | { type: 'encounterBattle/SET_MONSTER_HP', rowID: string, hp: number }
   | { type: 'encounterBattle/SET_MONSTER_STATE', rowID: string, state: MonsterState}
   | { type: 'encounterBattle/NEXT_TURN' };

@@ -1,8 +1,8 @@
 // @flow
 import type { State } from 'shared/types';
-import type { BattleMonsters } from 'shared/types/encounterBattle';
+import type { BattleMonsterRows } from 'shared/types/monsters';
 
-export const getMonsters = (state: State): BattleMonsters => (
+export const getMonsters = (state: State): BattleMonsterRows => (
   state.encounterBattle ? state.encounterBattle.monsters : []
 );
 export const getTurn = (state: State): number => (

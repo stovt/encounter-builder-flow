@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
-import type { EncounterBuilderAction, Group, Monster } from 'shared/types/encounterBuilder';
+import type { EncounterBuilderAction, Group } from 'shared/types/encounterBuilder';
+import type { Monster } from 'shared/types/monsters';
+import { CR_INFO } from 'shared/constants';
 import StyledMonsterName from './MonsterName';
 import StyledMonsterDescription from './MonsterDescription';
 import StyledGroupInfo from './GroupInfo.styled';
@@ -14,12 +16,15 @@ type Props = {
 const GroupInfo = ({ group: { monster, qty }, setMonsterQTY }: Props) => (
   <StyledGroupInfo>
     <div>
-      <StyledMonsterName>{monster.displayName}</StyledMonsterName>
-      <StyledMonsterDescription cr={monster.data.cr} xp={monster.data.exp} />
+      <StyledMonsterName>{monster.name}</StyledMonsterName>
+      <StyledMonsterDescription
+        cr={monster.challenge_rating}
+        xp={CR_INFO[monster.challenge_rating].exp}
+      />
     </div>
     <div>
       <Input
-        monster={monster}
+        monsterID={monster.id}
         setMonsterQTY={setMonsterQTY}
         qty={qty}
       />

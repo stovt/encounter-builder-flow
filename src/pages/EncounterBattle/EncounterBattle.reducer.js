@@ -1,28 +1,19 @@
 // @flow
 import v4 from 'uuid/v4';
-import type { Monster } from 'shared/types/encounterBuilder';
-import type { EncounterBattle, BattleMonster, BattleMonsters } from 'shared/types/encounterBattle';
+import type { EncounterBattle } from 'shared/types/encounterBattle';
+import type { Monster, BattleMonsterRow, BattleMonsterRows } from 'shared/types/monsters';
 import type { Action } from 'shared/types';
-import { ADD_MONSTER_TO_GROUP, SET_MONSTER_QTY } from 'pages/EncounterBuilder/EncounterBuilder.actions';
+import { SET_MONSTER_QTY } from 'pages/EncounterBuilder/EncounterBuilder.actions';
 import { getInitiative } from './EncounterBattle.helpers';
-import { SET_MONSTER_HP, SET_MONSTER_STATE, NEXT_TURN } from './EncounterBattle.actions';
+import {
+  ADD_MONSTER_TO_BATTLE_TABLE, SET_MONSTER_HP, SET_MONSTER_STATE, NEXT_TURN
+} from './EncounterBattle.actions';
 
-const modifyMonsterData = (monster: Monster): { id: string, monster: BattleMonster } => ({
-  id: v4(),
+const modifyMonsterData = (monster: Monster): BattleMonsterRow => ({
+  rowID: v4(),
   monster: {
-    id: monster._id,
-    name: monster.displayName,
-    size: monster.data.size,
-    type: monster.data.type,
-    cr: monster.data.cr,
-    exp: Number(monster.data.exp),
-    hp: Number(monster.data.hp),
-    armor: monster.data.armor,
-    ac: Number(monster.data.ac),
-    speed: monster.data.speed,
-    dex: Number(monster.data.dex),
-    actions: monster.data.actions,
-    initiative: getInitiative(Number(monster.data.dex)),
+    ...monster,
+    initiative: getInitiative(monster.dexterity),
     state: []
   }
 });
@@ -37,8 +28,8 @@ const encounterBattleReducer = (
   state: EncounterBattle = initialState, action: Action
 ): EncounterBattle => {
   switch (action.type) {
-    case ADD_MONSTER_TO_GROUP: {
-      const newMonstersState: BattleMonsters = [
+    case ADD_MONSTER_TO_BATTLE_TABLE: {
+      const newMonstersState: BattleMonsterRows = [
         ...state.monsters,
         modifyMonsterData(action.monster)
       ].sort((a, b) => b.monster.initiative - a.monster.initiative);
@@ -50,7 +41,7 @@ const encounterBattleReducer = (
         };
       }
 
-      const newTurn = newMonstersState.findIndex(d => d.id === state.monsters[state.turn].id);
+      const newTurn = newMonstersState.findIndex(d => d.rowID === state.monsters[state.turn].rowID);
       return {
         ...state,
         monsters: newMonstersState,
@@ -62,10 +53,12 @@ const encounterBattleReducer = (
 
       const { monster, qty } = action;
 
-      const monsters = state.monsters.filter(data => data.monster.id === monster._id);
+      const monsters: BattleMonsterRows = state.monsters.filter(
+        data => data.monster.id === monster.id
+      );
       if (!monsters.length) return state;
 
-      let newMonstersState: BattleMonsters;
+      let newMonstersState: BattleMonsterRows;
       if (qty > monsters.length) {
         newMonstersState = [
           ...state.monsters,
@@ -74,10 +67,10 @@ const encounterBattleReducer = (
       } else {
         newMonstersState = [
           ...state.monsters.slice(
-            0, state.monsters.findIndex(data => data.monster.id === monster._id)
+            0, state.monsters.findIndex(data => data.monster.id === monster.id)
           ),
           ...state.monsters.slice(
-            state.monsters.findIndex(data => data.monster.id === monster._id) + 1
+            state.monsters.findIndex(data => data.monster.id === monster.id) + 1
           )
         ].sort((a, b) => b.monster.initiative - a.monster.initiative);
       }
@@ -89,7 +82,7 @@ const encounterBattleReducer = (
         };
       }
 
-      const newTurn = newMonstersState.findIndex(d => d.id === state.monsters[state.turn].id);
+      const newTurn = newMonstersState.findIndex(d => d.rowID === state.monsters[state.turn].rowID);
       return {
         ...state,
         monsters: newMonstersState,
@@ -99,21 +92,21 @@ const encounterBattleReducer = (
     case SET_MONSTER_HP: {
       const { rowID, hp } = action;
 
-      const monsterData = state.monsters.find(data => data.id === rowID);
+      const monsterData = state.monsters.find(data => data.rowID === rowID);
 
       if (monsterData) {
         return {
           ...state,
           monsters: [
-            ...state.monsters.slice(0, state.monsters.findIndex(m => m.id === rowID)),
+            ...state.monsters.slice(0, state.monsters.findIndex(m => m.rowID === rowID)),
             {
-              id: rowID,
+              rowID,
               monster: {
                 ...monsterData.monster,
-                hp
+                hit_points: hp
               }
             },
-            ...state.monsters.slice(state.monsters.findIndex(m => m.id === rowID) + 1)
+            ...state.monsters.slice(state.monsters.findIndex(m => m.rowID === rowID) + 1)
           ]
         };
       }
@@ -122,21 +115,21 @@ const encounterBattleReducer = (
     case SET_MONSTER_STATE: {
       const { rowID, state: monsterState } = action;
 
-      const monsterData = state.monsters.find(data => data.id === rowID);
+      const monsterData = state.monsters.find(data => data.rowID === rowID);
 
       if (monsterData) {
         return {
           ...state,
           monsters: [
-            ...state.monsters.slice(0, state.monsters.findIndex(m => m.id === rowID)),
+            ...state.monsters.slice(0, state.monsters.findIndex(m => m.rowID === rowID)),
             {
-              id: rowID,
+              rowID,
               monster: {
                 ...monsterData.monster,
                 state: monsterState
               }
             },
-            ...state.monsters.slice(state.monsters.findIndex(m => m.id === rowID) + 1)
+            ...state.monsters.slice(state.monsters.findIndex(m => m.rowID === rowID) + 1)
           ]
         };
       }

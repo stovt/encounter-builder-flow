@@ -2,12 +2,6 @@
 import type { PartyLevels } from 'shared/types/encounterBuilder';
 import { getTotalPlayerCount, getTotalPartyExpLevels } from 'pages/EncounterBuilder/EncounterBuilder.helpers';
 
-export const crValueToNumber = (cr: string): number => {
-  const numValues: number[] = cr.split('/').map(Number);
-  if (numValues.length === 1) return numValues[0];
-  return numValues[0] / numValues[1];
-};
-
 export const getThreat = (partyLevels: PartyLevels) => {
   const count = getTotalPlayerCount(partyLevels);
   const levels = getTotalPartyExpLevels(partyLevels);

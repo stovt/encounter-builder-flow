@@ -3,9 +3,8 @@ import React from 'react';
 import { Col, Row } from 'react-styled-flexboxgrid';
 import type { ErrorType } from 'shared/types';
 import type { Breakpoints } from 'shared/types/breakpoints';
-import type {
-  EncounterBuilderAction, Monsters, Groups, PartyLevels
-} from 'shared/types/encounterBuilder';
+import type { EncounterBuilderAction, Groups, PartyLevels } from 'shared/types/encounterBuilder';
+import type { MonstersBase } from 'shared/types/monsters';
 import LoadingComponent from 'shared/components/LoadingComponent';
 import AlertBox from 'shared/components/AlertBox';
 import Divider from 'shared/components/Divider';
@@ -17,7 +16,7 @@ import MonstersTable from './MonstersTable';
 import BattleButton from './BattleButton';
 
 type Props = {
-  monsters: Monsters,
+  monsters: MonstersBase,
   loading: boolean,
   error: ErrorType,
   groups: Groups,
@@ -80,16 +79,7 @@ class EncounterBuilder extends React.PureComponent<Props> {
           <Row>
             <Col xs={12}>
               <MonstersTable
-                monsters={
-                  monsters.map(monster => ({
-                    id: monster._id,
-                    name: monster.displayName,
-                    size: monster.data.size,
-                    type: monster.data.type,
-                    cr: monster.data.cr,
-                    exp: Number(monster.data.exp)
-                  }))
-                }
+                monsters={monsters}
                 partyLevels={partyLevels}
               />
               {(breakpoints.xs || (breakpoints.sm && !breakpoints.md)) && (

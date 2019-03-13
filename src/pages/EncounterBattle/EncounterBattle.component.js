@@ -2,14 +2,14 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Col, Row } from 'react-styled-flexboxgrid';
-import type { BattleMonsters } from 'shared/types/encounterBattle';
+import type { BattleMonsterRows } from 'shared/types/monsters';
 import StyledTitle from 'shared/components/Title';
 import BattleTable from './BattleTable';
 import ButtonsWrapper from './ButtonsWrapper';
 import BackButton from './BackButton';
 import NextTurnButton from './NextTurnButton';
 
-const EncounterBattle = ({ monsters }: { monsters: BattleMonsters }) => {
+const EncounterBattle = ({ monsters }: { monsters: BattleMonsterRows }) => {
   if (!monsters.length) {
     return (
       <Row>

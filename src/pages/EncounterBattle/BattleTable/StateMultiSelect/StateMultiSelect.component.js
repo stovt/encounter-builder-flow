@@ -3,7 +3,8 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import Select from 'react-select';
-import type { EncounterBattleAction, BattleMonster } from 'shared/types/encounterBattle';
+import type { EncounterBattleAction } from 'shared/types/encounterBattle';
+import type { MonsterState } from 'shared/types/monsters';
 import { MONSTER_STATES } from './StateMultiSelect.constants';
 import { customStyles } from './StateMultiSelect.styled';
 import MultiValueLabel from './MultiValueLabel';
@@ -11,14 +12,14 @@ import MultiValueLabel from './MultiValueLabel';
 declare var document: any;
 
 type Props = {
-  value: BattleMonster,
+  value: MonsterState,
   rowID: string,
-  setMonsterState: (rowID: string, state: BattleMonster) => EncounterBattleAction,
+  setMonsterState: (rowID: string, state: MonsterState) => EncounterBattleAction,
   intl: IntlShape
 }
 
 class StateMultiSelect extends React.PureComponent<Props> {
-  handleOnChange = (value: BattleMonster) => {
+  handleOnChange = (value: MonsterState) => {
     const { setMonsterState, rowID } = this.props;
     setMonsterState(rowID, value);
   };

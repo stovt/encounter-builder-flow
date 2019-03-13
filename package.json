@@ -5,7 +5,9 @@
   "homepage": "http://sergeytovt.github.io/encounter-builder",
   "dependencies": {
     "connected-react-router": "^6.2.2",
+    "dotenv": "^7.0.0",
     "history": "^4.7.2",
+    "node-fetch": "^2.3.0",
     "polished": "^3.0.0",
     "react": "^16.7.0",
     "react-calculator-input": "^1.1.1",
@@ -40,7 +42,8 @@
     "flow:start": "flow",
     "flow:check": "flow check",
     "flow-typed:update": "flow-typed update-cache",
-    "analyze": "source-map-explorer build/static/js/main.*"
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "parse-monsters": "node scripts/parseMonsters.js"
   },
   "husky": {
     "hooks": {

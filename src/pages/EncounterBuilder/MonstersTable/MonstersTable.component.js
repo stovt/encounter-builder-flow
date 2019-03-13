@@ -3,21 +3,22 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import ReactTable from 'react-table';
-import type { Monster, MonsterTableData, PartyLevels } from 'shared/types/encounterBuilder';
+import type { PartyLevels } from 'shared/types/encounterBuilder';
+import type { MonstersBase } from 'shared/types/monsters';
 import type { ModalsAction } from 'shared/types/modals';
+import { CR_INFO } from 'shared/constants';
 import { MONSTER_INFO_MODAL_ID } from 'shared/components/MonsterInfoModal/MonsterInfoModal.constants';
 import AddMonsterButton from './AddMonsterButton';
 import CRFilter from './CRFilter';
 import SizeFilter from './SizeFilter';
 import TypeFilter from './TypeFilter';
-import { crValueToNumber, getDangerZoneClass } from './MonstersTable.helpers';
+import { getDangerZoneClass } from './MonstersTable.helpers';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZE_OPTIONS } from './MonstersTable.constants';
 
 type Props = {
-  monsters: MonsterTableData[],
+  monsters: MonstersBase,
   partyLevels: PartyLevels,
-  showModal: (modalId: string, data: { monster: Monster }) => ModalsAction,
-  getMonsterByID: (monsterID: string) => ?Monster,
+  showModal: (modalId: string, data: { monsterID: string }) => ModalsAction,
   intl: IntlShape
 }
 type Filter = {
@@ -36,7 +37,7 @@ class MonstersTable extends React.PureComponent<Props> {
   }
 
   CRFilterMethod = (filter: Filter, row: any): boolean => {
-    const rowNumValue = crValueToNumber(row[filter.id]);
+    const rowNumValue = CR_INFO[row[filter.id]].numeric;
     const { value: { minCR, maxCR } } = filter;
 
     if (!minCR && !maxCR) return true;
@@ -54,13 +55,9 @@ class MonstersTable extends React.PureComponent<Props> {
 
   typeRenderer = ({ value }: { value: string }): React$Element<'span'> => {
     const { intl: { formatMessage } } = this.props;
-    const typeValues: string[] = value.split(' (');
-    const translatedType: string = formatMessage({ id: `monster.types.${typeValues[0]}` });
-    const mainType: string = translatedType.charAt(0).toUpperCase() + translatedType.slice(1);
-    const typeDescription: string = ` (${typeValues[1]}`;
-    return (
-      <span>{mainType}{typeValues[1] && <i>{typeDescription}</i>}</span>
-    );
+    const translatedType: string = formatMessage({ id: `monster.types.${value}` });
+    const type: string = translatedType.charAt(0).toUpperCase() + translatedType.slice(1);
+    return <span>{type}</span>;
   }
 
   typeFilterMethod = (filter: Filter, row: any): boolean => {
@@ -71,9 +68,7 @@ class MonstersTable extends React.PureComponent<Props> {
   handleTdProps = (state: any, rowInfo: any, column: any): {} => ({
     onClick: (e, handleOriginal) => {
       if (column.id !== 'id') {
-        const { getMonsterByID, showModal } = this.props;
-        const monster = getMonsterByID(rowInfo.original.id);
-        if (monster) showModal(MONSTER_INFO_MODAL_ID, { monster });
+        this.props.showModal(MONSTER_INFO_MODAL_ID, { monsterID: rowInfo.original.id });
       }
       if (handleOriginal) handleOriginal();
     }
@@ -95,11 +90,11 @@ class MonstersTable extends React.PureComponent<Props> {
       accessor: 'name'
     }, {
       Header: formatMessage({ id: 'monster.cr' }),
-      accessor: 'cr',
+      accessor: 'challenge_rating',
       getProps: (state: any, rowInfo: any) => {
         if (!rowInfo) return {};
         return {
-          className: getDangerZoneClass(partyLevels, rowInfo.original.exp)
+          className: getDangerZoneClass(partyLevels, CR_INFO[rowInfo.original.challenge_rating].exp)
         };
       },
       width: 190,

@@ -1,2 +1,2 @@
 // @flow
-export { default } from './BattleButton.component';
+export { default } from './BattleButton.container';

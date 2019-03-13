@@ -1,5 +1,6 @@
 // @flow
 import type { PartyLevel, PartyLevels, Groups } from 'shared/types/encounterBuilder';
+import { CR_INFO } from 'shared/constants';
 
 type PartyLevelsType = {|
   easy: number,
@@ -34,7 +35,7 @@ export const getTotalPartyExpLevels = (partyLevels: PartyLevels): PartyLevelsTyp
 };
 
 export const getTotalExp = (groups: Groups): number => (
-  groups.reduce((acc, group) => acc + (Number(group.monster.data.exp) * group.qty), 0)
+  groups.reduce((acc, group) => acc + (CR_INFO[group.monster.challenge_rating].exp * group.qty), 0)
 );
 
 export const getTotalQty = (groups: Groups): number => (

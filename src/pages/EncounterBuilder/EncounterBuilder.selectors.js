@@ -1,14 +1,24 @@
 // @flow
 import type { State, ErrorType } from 'shared/types';
-import type {
-  Monster, Monsters, PartyLevels, Groups
-} from 'shared/types/encounterBuilder';
+import type { PartyLevels, Groups } from 'shared/types/encounterBuilder';
+import type { MonstersBase, Monster, Monsters } from 'shared/types/monsters';
 
-export const getMonsters = (state: State): Monsters => (
+export const getMonsters = (state: State): MonstersBase => (
   state.encounterBuilder.monsters
 );
+export const getLoadedMonsters = (state: State): Monsters => (
+  state.encounterBuilder ? state.encounterBuilder.loadedMonsters : []
+);
 export const getMonsterByID = (state: State, monsterID: string): ?Monster => (
-  state.encounterBuilder.monsters.find(monster => monster._id === monsterID)
+  state.encounterBuilder
+    ? state.encounterBuilder.loadedMonsters.find(monster => monster.id === monsterID)
+    : undefined
+);
+export const isMonsterLoading = (state: State): boolean => (
+  state.encounterBuilder ? state.encounterBuilder.monsterLoading : false
+);
+export const getMonsterError = (state: State): ?ErrorType => (
+  state.encounterBuilder ? state.encounterBuilder.monsterError : null
 );
 export const isLoading = (state: State): boolean => (
   state.encounterBuilder.loading

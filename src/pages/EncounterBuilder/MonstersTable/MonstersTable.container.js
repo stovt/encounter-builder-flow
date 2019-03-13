@@ -1,17 +1,11 @@
 // @flow
 import { connect } from 'react-redux';
-import type { Dispatch, State } from 'shared/types';
-import type { Monster } from 'shared/types/encounterBuilder';
-import { getMonsterByID } from 'pages/EncounterBuilder/EncounterBuilder.selectors';
+import type { Dispatch } from 'shared/types';
 import { showModal } from 'shared/components/Modal/Modal.actions';
 import MonstersTable from './MonstersTable.component';
 
-const mapStateToProps = (state: State) => ({
-  getMonsterByID: (monsterID: string) => getMonsterByID(state, monsterID)
-});
-
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  showModal: (modalId: string, data: { monster: Monster }) => dispatch(showModal(modalId, data))
+  showModal: (modalId: string, data: { monsterID: string }) => dispatch(showModal(modalId, data))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MonstersTable);
+export default connect(null, mapDispatchToProps)(MonstersTable);
