@@ -1,5 +1,5 @@
 // @flow
-import createBrowserHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 import config from 'config';
 
