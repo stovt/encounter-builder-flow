@@ -9,6 +9,8 @@ type Props = {
 }
 
 class BreakpointListener extends React.PureComponent<Props> {
+  listeners: { [breakpoint: Breakpoint]: any }
+
   componentDidMount() {
     const { breakpointChange } = this.props;
     this.listeners = fromBreakpoints((breakpoint) => {
@@ -31,8 +33,6 @@ class BreakpointListener extends React.PureComponent<Props> {
       mql.removeListener(listener);
     });
   }
-
-  listeners: { [breakpoint: Breakpoint]: any }
 
   render() {
     return this.props.children;
