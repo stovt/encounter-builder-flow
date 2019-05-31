@@ -10,6 +10,13 @@ export type MonsterAction = {
   name: string,
   desc: string
 };
+export type MonsterSpeed = {
+  walk?: number,
+  burrow?: number,
+  fly?: number,
+  swim?: number,
+  climb?: number
+}
 export type MonsterActions = MonsterAction[];
 
 export type MonsterRequestBase = {
@@ -33,7 +40,7 @@ export type MonsterRequest = {
     armor_class: number,
     armor_desc: string,
     hit_dice: string,
-    speed: string,
+    speed: MonsterSpeed,
     strength: number,
     dexterity: number,
     constitution: number,

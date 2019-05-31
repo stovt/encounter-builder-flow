@@ -3,7 +3,7 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import ReactTable from 'react-table';
-import type { MonsterActions, BattleMonsterRows } from 'shared/types/monsters';
+import type { MonsterActions, BattleMonsterRows, MonsterSpeed } from 'shared/types/monsters';
 import type { ModalsAction } from 'shared/types/modals';
 import { MONSTER_INFO_MODAL_ID } from 'shared/components/MonsterInfoModal/MonsterInfoModal.constants';
 import HPInput from './HPInput';
@@ -65,8 +65,19 @@ class BattleTable extends React.PureComponent<Props> {
       style: { justifyContent: 'center' },
       width: 120
     }, {
-      Header: formatMessage({ id: 'monster.speed' }),
+      Header: formatMessage({ id: 'monster.speed.title' }),
       accessor: 'monster.speed',
+      Cell: ({ value }: { value: MonsterSpeed }) => {
+        const speed = `\
+        ${value.walk ? `${formatMessage({ id: 'monster.speed.walk' }, { speed: value.walk })}, ` : ''}\
+        ${value.burrow ? `${formatMessage({ id: 'monster.speed.burrow' }, { speed: value.burrow })}, ` : ''}\
+        ${value.fly ? `${formatMessage({ id: 'monster.speed.fly' }, { speed: value.fly })}, ` : ''}\
+        ${value.swim ? `${formatMessage({ id: 'monster.speed.swim' }, { speed: value.swim })}, ` : ''}\
+        ${value.climb ? `${formatMessage({ id: 'monster.speed.climb' }, { speed: value.climb })}, ` : ''}\
+        `.slice(0, -2);
+
+        return speed;
+      },
       width: 160
     }, {
       Header: formatMessage({ id: 'monster.state' }),

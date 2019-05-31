@@ -63,12 +63,26 @@ ${stealth ? `${formatMessage({ id: 'monster.skill-types.stealth' })} ${stealth >
 ${survival ? `${formatMessage({ id: 'monster.skill-types.survival' })} ${survival > 0 ? '+' : '-'}${survival}, ` : ''}\
 `.slice(0, -2);
 
+  const {
+    speed: {
+      walk, burrow, fly, swim, climb
+    }
+  } = monster;
+
+  const speed = `\
+${walk ? `${formatMessage({ id: 'monster.speed.walk' }, { speed: walk })}, ` : ''}\
+${burrow ? `${formatMessage({ id: 'monster.speed.burrow' }, { speed: burrow })}, ` : ''}\
+${fly ? `${formatMessage({ id: 'monster.speed.fly' }, { speed: fly })}, ` : ''}\
+${swim ? `${formatMessage({ id: 'monster.speed.swim' }, { speed: swim })}, ` : ''}\
+${climb ? `${formatMessage({ id: 'monster.speed.climb' }, { speed: climb })}, ` : ''}\
+`.slice(0, -2);
+
   return (
     <StyledMonsterInfoModal>
       <div><b>{description}</b></div>
-      <div><b>{formatMessage({ id: 'monster.armor-class' })}</b> {monster.armor_class}</div>
-      <div><b>{formatMessage({ id: 'monster.hit-points' })}</b> {monster.hit_points} ({monster.hit_dice})</div>
-      <div><b>{formatMessage({ id: 'monster.speed' })}</b> {monster.speed}</div>
+      <div><b>{formatMessage({ id: 'monster.armor-class' })}:</b> {monster.armor_class}</div>
+      <div><b>{formatMessage({ id: 'monster.hit-points' })}:</b> {monster.hit_points} ({monster.hit_dice})</div>
+      <div><b>{formatMessage({ id: 'monster.speed.title' })}:</b> {speed}</div>
       <div>
         <InfoTable
           data={[{
@@ -82,18 +96,18 @@ ${survival ? `${formatMessage({ id: 'monster.skill-types.survival' })} ${surviva
         />
       </div>
       {savingThrows && (
-        <div><b>{formatMessage({ id: 'monster.saving-throws' })}</b> {savingThrows}</div>
+        <div><b>{formatMessage({ id: 'monster.saving-throws' })}:</b> {savingThrows}</div>
       )}
       {skills && (
-        <div><b>{formatMessage({ id: 'monster.skills' })}</b> {skills}</div>
+        <div><b>{formatMessage({ id: 'monster.skills' })}:</b> {skills}</div>
       )}
       {monster.senses && (
-        <div><b>{formatMessage({ id: 'monster.senses' })}</b> {monster.senses}</div>
+        <div><b>{formatMessage({ id: 'monster.senses' })}:</b> {monster.senses}</div>
       )}
       {monster.languages && (
-        <div><b>{formatMessage({ id: 'monster.languages' })}</b> {monster.languages}</div>
+        <div><b>{formatMessage({ id: 'monster.languages' })}:</b> {monster.languages}</div>
       )}
-      <div><b>{formatMessage({ id: 'monster.cr' })}</b> {monster.challenge_rating} ({CR_INFO[monster.challenge_rating].exp} {formatMessage({ id: 'monster.xps' })})</div>
+      <div><b>{formatMessage({ id: 'monster.cr' })}:</b> {monster.challenge_rating} ({CR_INFO[monster.challenge_rating].exp} {formatMessage({ id: 'monster.xps' })})</div>
       {monster.special_abilities && (
         <>
           <Divider />

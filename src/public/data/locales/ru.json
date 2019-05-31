@@ -103,7 +103,14 @@
     "armor": "Броня",
     "armor-class": "Класс брони",
     "initiative": "Инициатива",
-    "speed": "Скорость",
+    "speed": {
+      "title": "Скорость",
+      "walk": "ходьба {speed} фт.",
+      "burrow": "ползание {speed} фт.",
+      "fly": "полет {speed} фт.",
+      "swim": "плавание {speed} фт.",
+      "climb": "лазание {speed} фт."
+    },
     "saving-throws": "Спасбросок",
     "skills": "Умения",
     "skill-types": {
