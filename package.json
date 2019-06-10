@@ -2,7 +2,7 @@
   "name": "encounter-builder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://sergeytovt.github.io/encounter-builder",
+  "homepage": "http://stovt.github.io/encounter-builder-flow",
   "dependencies": {
     "connected-react-router": "^6.2.2",
     "dotenv": "^8.0.0",
